@@ -44,6 +44,7 @@ do
                 System.Console.WriteLine(list);
             Console.WriteLine("Kayıt Silmek İçin (d)");
             Console.WriteLine("İşlem Menüsü İçin (m)");
+            ListSwitch(contactService);
             break;
         case "s":
 
@@ -57,4 +58,31 @@ do
     }
 }
  while (choose != "e") ;
+static void ListSwitch(IContactService service)
+{
+    var contactService=service;
+    string choose = string.Empty;
+    do
+    {
+         choose = Console.ReadLine();
+        switch (choose)
+        {
+            case "d":
+                Console.WriteLine("Silmek istediğiniz kisinin id-ni giriniz");
+                int id;
+                var ids = Console.ReadLine();
+                var result = int.TryParse(ids, out id);
+                contactService.Delete(id);
+                Console.WriteLine("Kisi silindi");
+                break;
+            case "m":
+                Console.WriteLine("Menü acildi");
+                break;
+            default:
+                Console.WriteLine("Please correct slect");
+                break;
+        }
+    }
+    while(choose != "m");
+}
 //coming soooon  :))))))
